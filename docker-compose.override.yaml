@@ -1,0 +1,25 @@
+services:
+  reverse_proxy:
+    image: traefik:v3.1
+    # Remove if you don't need SSL
+    command:
+      - --certificatesResolvers.letencrypt.acme.email=${LETS_ENCRYPT_EMAIL}
+    ports:
+      - "80:80"
+      # Remove if you don't need SSL
+      - "443:443"
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./traefik.yml:/traefik.yml:ro
+      - traefik-certs:/certs
+    networks:
+      - proxy
+
+volumes:
+  traefik-certs:
+
+networks:
+  proxy:
+    name: proxy
+    external: false
