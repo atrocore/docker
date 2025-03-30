@@ -21,7 +21,7 @@ providers:
     exposedByDefault: false
     network: proxy
 
-# Remove if you don't need SSL
+# Remove if you don't need Lets Encrypt SSL
 certificatesResolvers:
   letencrypt:
     acme:

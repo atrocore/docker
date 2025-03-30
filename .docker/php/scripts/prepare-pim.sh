@@ -59,6 +59,8 @@ fi
 
 php composer.phar self-update && php composer.phar update
 
+cp /var/www/scripts/prepare-pim.php . && php prepare-pim.php "$4" "$5" "$6" && rm prepare-pim.php
+
 echo "Setting up files permissions..."
 find . -type d -exec chmod 755 {} + && find . -type f -exec chmod 644 {} +;
 find client data upload -type d -exec chmod 775 {} + && find client data upload -type f -exec chmod 664 {} +
