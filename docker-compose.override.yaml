@@ -27,7 +27,7 @@ services:
       - --certificatesResolvers.letencrypt.acme.email=${LETS_ENCRYPT_EMAIL}
     ports:
       - "80:80"
-       Remove if you don't need SSL
+     # Remove if you don't need SSL
       - "443:443"
     restart: unless-stopped
     volumes:
