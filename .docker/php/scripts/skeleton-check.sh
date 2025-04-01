@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VARIANTS=("pim" "pim-no-demo")
+VARIANTS=("pim" "pim-no-demo" "atrocore")
 STABILITIES=("stable" "rc")
 
 check_argument() {
