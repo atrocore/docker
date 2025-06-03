@@ -30,8 +30,8 @@ fi
 tee "/etc/apache2/sites-available/$3.conf" > /dev/null << EOL
 <VirtualHost *:80>
   ServerName $3
-  DocumentRoot /var/www/$3
-  <Directory /var/www/$3/>
+  DocumentRoot /var/www/$3/public
+  <Directory /var/www/$3/public/>
     AllowOverride All
   </Directory>
 
