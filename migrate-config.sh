@@ -11,7 +11,7 @@ modify_container_files() {
     local domain=$1
     local container_name="web"
 
-    docker exec $container_name bash -c "tee \"/etc/apache2/sites-available/${domain}.conf\" > /dev/null << EOL
+    docker compose exec $container_name bash -c "tee \"/etc/apache2/sites-available/${domain}.conf\" > /dev/null << EOL
 <VirtualHost *:80>
   ServerName ${domain}
   DocumentRoot /var/www/${domain}/public
@@ -24,12 +24,8 @@ modify_container_files() {
 </VirtualHost>
 EOL"
 
-    docker exec $container_name bash -c "mkdir -p /var/log/apache2/${domain} && \
-        chown -R www-data:www-data /var/log/apache2/${domain} && \
-        a2ensite ${domain}"
-
-    docker exec $container_name bash -c "sed -i \"/\/var\/www\/${domain}\/.*\.php cron/d\" /var/spool/cron/crontabs/www-data"
-    docker exec $container_name bash -c "echo \"* * * * * /usr/local/bin/php /var/www/${domain}/console.php cron\" >> /var/spool/cron/crontabs/www-data"
+    docker compose exec $container_name bash -c "sed -i \"/\/var\/www\/${domain}\/.*\.php cron/d\" /var/spool/cron/crontabs/www-data"
+    docker compose exec $container_name bash -c "echo \"* * * * * /usr/local/bin/php /var/www/${domain}/console.php cron\" >> /var/spool/cron/crontabs/www-data"
 
     echo "Configuration updated for domain: ${domain}"
 }
@@ -41,4 +37,4 @@ if [ ! -z "$TESTING_DOMAIN" ]; then
 fi
 
 
-docker exec web service apache2 reload
+docker compose exec web service apache2 reload
