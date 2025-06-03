@@ -67,6 +67,6 @@ find client data upload -type d -exec chmod 775 {} + && find client data upload 
 chown -R www-data:www-data "/var/www/$3"
 
 echo "Configuring cron job..."
-echo "* * * * * /usr/local/bin/php /var/www/$3/index.php cron" >> /var/spool/cron/crontabs/www-data
+echo "* * * * * /usr/local/bin/php /var/www/$3/console.php cron" >> /var/spool/cron/crontabs/www-data
 
 echo "PIM instance for $3 is ready to install."
