@@ -25,8 +25,8 @@ modify_container_files() {
 EOL"
 
     docker compose exec $container_name bash -c 'chown root /var/spool/cron/crontabs/www-data'
-    docker compose exec $container_name bash -c 'sed -i "/\/var\/www\/${domain}\/.*\.php cron/d" /var/spool/cron/crontabs/www-data'
-    docker compose exec $container_name bash -c 'echo "* * * * * /usr/local/bin/php /var/www/${domain}/console.php cron" >> /var/spool/cron/crontabs/www-data'
+    docker compose exec $container_name bash -c "sed -i \"/\/var\/www\/${domain}\/.*\.php cron/d\" /var/spool/cron/crontabs/www-data"
+    docker compose exec $container_name bash -c "echo \"* * * * * /usr/local/bin/php /var/www/${domain}/console.php cron\" >> /var/spool/cron/crontabs/www-data"
     docker compose exec $container_name bash -c 'chown www-data /var/spool/cron/crontabs/www-data'
 
     echo "Configuration updated for domain: ${domain}"
