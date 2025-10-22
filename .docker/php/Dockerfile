@@ -1,4 +1,4 @@
-FROM php:8.1-apache
+FROM php:8.2-apache-bookworm
 LABEL maintainer="AtroCore GmbH <support@atrocore.com>"
 
 ARG SKELETON_VARIANT
@@ -33,7 +33,7 @@ RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"  \
         zlib1g-dev \
         libmagickwand-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) mbstring curl gd xml zip pdo_pgsql exif \
+    && docker-php-ext-install -j$(nproc) mbstring curl gd xml zip pdo_pgsql exif ftp \
     && pecl install xattr imagick \
     && docker-php-ext-enable xattr imagick \
     && a2enmod rewrite && a2dissite 000-default
