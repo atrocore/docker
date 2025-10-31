@@ -1,7 +1,7 @@
 #!/bin/bash
 
 VARIANTS=("pim-no-demo" "atrocore")
-STABILITIES=("stable" "rc")
+STABILITIES=("stable" "rc" "beta")
 
 check_argument() {
     local arg="$1"
