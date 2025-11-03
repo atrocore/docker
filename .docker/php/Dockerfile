@@ -27,12 +27,13 @@ RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"  \
 		libjpeg62-turbo-dev \
 		libpng-dev \
         libpq-dev \
+        libavif-dev \
         libattr1-dev \
         libonig-dev \
         libzip-dev \
         zlib1g-dev \
         libmagickwand-dev \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg --with-avif \
     && docker-php-ext-install -j$(nproc) mbstring curl gd xml zip pdo_pgsql exif ftp \
     && pecl install xattr imagick \
     && docker-php-ext-enable xattr imagick \
