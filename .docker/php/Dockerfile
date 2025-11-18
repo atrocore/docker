@@ -33,8 +33,10 @@ RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"  \
         libzip-dev \
         zlib1g-dev \
         libmagickwand-dev \
+        libldap2-dev \
+        libldap-common \
     && docker-php-ext-configure gd --with-freetype --with-jpeg --with-avif \
-    && docker-php-ext-install -j$(nproc) mbstring curl gd xml zip pdo_pgsql exif ftp \
+    && docker-php-ext-install -j$(nproc) mbstring curl gd xml zip pdo_pgsql exif ftp ldap \
     && pecl install xattr imagick \
     && docker-php-ext-enable xattr imagick \
     && a2enmod rewrite && a2dissite 000-default
