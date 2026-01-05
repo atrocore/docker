@@ -23,7 +23,7 @@ services:
 #      - "traefik.http.routers.${PROXY_TESTING_ROUTER}.tls=true"
 #      - "traefik.http.routers.${PROXY_TESTING_ROUTER}.tls.certresolver=letencrypt"
   reverse_proxy:
-    image: traefik:v3.1
+    image: traefik:v3.6
     # Remove if you don't need SSL from Lets Encrypt
     command:
       - --certificatesResolvers.letencrypt.acme.email=${LETS_ENCRYPT_EMAIL}
