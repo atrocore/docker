@@ -21,4 +21,5 @@ $config->set('database', [
     'user' => $argv[1],
     'password' => $argv[2],
 ]);
+$config->set('useChromeNoSandbox', true);
 $config->save();

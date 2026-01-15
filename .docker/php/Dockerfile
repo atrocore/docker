@@ -1,4 +1,4 @@
-FROM php:8.2-apache-bookworm
+FROM php:8.4-apache-bookworm AS base
 LABEL maintainer="AtroCore GmbH <support@atrocore.com>"
 
 ARG SKELETON_VARIANT
@@ -36,7 +36,7 @@ RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"  \
         libldap2-dev \
         libldap-common \
     && docker-php-ext-configure gd --with-freetype --with-jpeg --with-avif \
-    && docker-php-ext-install -j$(nproc) mbstring curl gd xml zip pdo_pgsql exif ftp ldap \
+    && docker-php-ext-install -j$(nproc) mbstring curl gd xml zip pdo_pgsql exif ftp ldap sockets \
     && pecl install xattr imagick \
     && docker-php-ext-enable xattr imagick \
     && a2enmod rewrite && a2dissite 000-default
@@ -56,3 +56,16 @@ COPY startup.sh /startup.sh
 RUN chmod +x /startup.sh
 
 CMD ["/startup.sh"]
+
+
+
+FROM base AS pdf
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        chromium \
+        chromium-driver \
+        libreoffice-core \
+        libreoffice-writer \
+        fonts-liberation \
+    && rm -rf /var/lib/apt/lists/* \
+    && ln -s /usr/bin/chromium /usr/bin/google-chrome
