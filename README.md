@@ -4,6 +4,6 @@ Deployment guide is available [here](https://help.atrocore.com/installation-and-
 
 ## Preconfigured Docker Compose services 
 
-- Apache HTTP server with PHP 8.2
+- Apache HTTP server with PHP 8.4
 - PostgreSQL 15
 - Traefik v3.6 (optional)
