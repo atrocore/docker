@@ -19,6 +19,14 @@ modify_container_files() {
     AllowOverride All
   </Directory>
 
+  <IfModule php_module>
+    php_admin_value memory_limit 256M
+    php_admin_value max_execution_time 180
+    php_admin_value max_input_time 180
+    php_admin_value post_max_size 20M
+    php_admin_value upload_max_filesize 20M
+  </IfModule>
+
   ErrorLog \"|/usr/bin/rotatelogs /var/log/apache2/${domain}/error_%Y.%m.%d.log 5M\"
   CustomLog \"|/usr/bin/rotatelogs /var/log/apache2/${domain}/access_%Y.%m.%d.log 5M\" combined
 </VirtualHost>

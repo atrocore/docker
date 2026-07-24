@@ -3,3 +3,5 @@ data/
 
 .env
 docker-compose.override.yaml
+docker-compose.testing.yaml
+docker-compose.host-bind.yaml
