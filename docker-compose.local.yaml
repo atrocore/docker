@@ -1,0 +1,5 @@
+# Local mode: publish web directly on the host, no reverse proxy.
+services:
+  web:
+    ports:
+      - "${LOCAL_PORT:-8080}:80"
