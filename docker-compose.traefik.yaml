@@ -1,0 +1,27 @@
+# Traefik mode: web is reachable only through the proxy on port 80 (HTTP only).
+services:
+  web:
+    networks:
+      - proxy
+      - default
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.services.${PROXY_PRODUCTION_ROUTER}.loadbalancer.server.port=80"
+      - "traefik.http.routers.${PROXY_PRODUCTION_ROUTER}.rule=Host(`${PRODUCTION_DOMAIN}`)"
+      - "traefik.http.routers.${PROXY_PRODUCTION_ROUTER}.entrypoints=web"
+
+  reverse_proxy:
+    image: traefik:v3.6
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./traefik.local.yml:/traefik.yml:ro
+    networks:
+      - proxy
+    restart: unless-stopped
+
+networks:
+  proxy:
+    name: proxy
+    external: false

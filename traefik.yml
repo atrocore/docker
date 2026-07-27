@@ -5,7 +5,6 @@ api:
 entryPoints:
   web:
     address: ":80"
-    # Comment section below if you don't need an SSL or you want to disable automatic redirect to HTTPS
     http:
       redirections:
         entryPoint:
@@ -21,7 +20,6 @@ providers:
     exposedByDefault: false
     network: proxy
 
-# Remove if you don't need Lets Encrypt SSL
 certificatesResolvers:
   letencrypt:
     acme:

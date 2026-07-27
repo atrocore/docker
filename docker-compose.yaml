@@ -1,3 +1,10 @@
+# Base stack: web + db. The deployment mode is layered on top via an override
+# file selected in COMPOSE_FILE (see .env):
+#   docker-compose.local.yaml        - web published directly on ${LOCAL_PORT}
+#   docker-compose.traefik.yaml      - Traefik reverse proxy, HTTP only
+#   docker-compose.traefik-ssl.yaml  - Traefik + HTTPS, Let's Encrypt, HTTP->HTTPS redirect
+# Use exactly one override file at a time.
+
 services:
   web:
     build:

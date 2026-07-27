@@ -12,7 +12,7 @@ ARG DB_USER
 ARG DB_PASSWORD
 
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"  \
-    && printf "post_max_size = 20M\nupload_max_filesize = 20M\nmax_execution_time = 180\nmax_input_time = 180\nmemory_limit = 256M" >> "$PHP_INI_DIR/php.ini" \
+    && printf "memory_limit = -1\nmax_execution_time = 0\nmax_input_time = -1\npost_max_size = 0\nupload_max_filesize = 0\n" >> "$PHP_INI_DIR/php.ini" \
     && apt-get update && apt-get install -y \
         git \
         cron \
