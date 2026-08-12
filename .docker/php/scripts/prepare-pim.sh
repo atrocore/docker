@@ -65,7 +65,7 @@ if grep -q '"minimum-stability"' composer.json; then
   sed -i "s/\"minimum-stability\": *\"[^\"]*\"/\"minimum-stability\": \"$2\"/" composer.json
 fi
 
-php composer.phar self-update && php composer.phar update
+php atrocore-installer.phar self-update && php atrocore-installer.phar update
 
 cp /var/www/scripts/prepare-pim.php . && php prepare-pim.php "$4" "$5" "$6" && rm prepare-pim.php
 
